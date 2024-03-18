@@ -17,7 +17,8 @@ exports.getProduct = (req, res, next)=>{
         res.render('shop/product-detail', {
             product: product,
             path: '/products',
-            pageTitle: product.title});
+            pageTitle: product.title
+        });
     });
 }
 
@@ -38,6 +39,12 @@ exports.getCart = (req, res, next)=>{
                 pageTitle: 'Your cart',
                 path:'/cart',
             });
+}
+
+exports.postCatd = (req, res, next) =>{
+    const prodId = req.body.productId;
+    console.log(prodId);
+    res.redirect('/cart');
 }
 
 exports.getOrders = (req, res, next)=>{

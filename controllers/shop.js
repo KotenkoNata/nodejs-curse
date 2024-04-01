@@ -37,23 +37,22 @@ exports.getIndex = (req, res, next)=>{
 }
 
 exports.getCart = (req, res, next)=>{
-    Cart.getCart(cart=>{
-        Product.fetchAll(products=>{
-            const cartProducts = [];
-            for(product of products){
-                const cartProductData = cart.products.find(prod=>prod.id===product.id);
-                if(cartProductData){
-                    cartProducts.push({productData: product, qty: cartProductData.qty});
-                }
-            }
-            res.render('shop/cart',
-                {
-                    pageTitle: 'Your cart',
-                    path:'/cart',
-                    products: cartProducts,
-                });
+    console.log(req.user.cart)
+    req.user
+        .getCart()
+        .then(cart=>{
+            return cart.getProducts()
+                .then(products => {
+                res.render('shop/cart',
+                            {
+                                pageTitle: 'Your cart',
+                                path:'/cart',
+                                products: products,
+                            });
+            })
+                .catch(err=>console.log(err));
         })
-    })
+        .catch(err=>console.log(err));
 }
 
 exports.postCart = (req, res, next) =>{

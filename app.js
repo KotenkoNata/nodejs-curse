@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const errorController = require('./controllers/error');
-const mongoConnection = require('./util/database');
+const mongoConnect = require('./util/database');
 
 const app = express();
 
@@ -32,7 +32,6 @@ app.use((req, res, next) => {
 
 app.use(errorController.get404);
 
-mongoConnection((client)=>{
-    console.log(client)
+mongoConnect(()=>{
     app.listen(3000);
 })

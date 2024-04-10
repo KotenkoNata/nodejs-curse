@@ -29,10 +29,10 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
-// app.use(shopRoutes);
+app.use(shopRoutes);
 
 app.use(errorController.get404);
 
 mongoConnect(()=>{
-    app.listen(3000);
+    app.listen(3200);
 })

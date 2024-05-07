@@ -52,20 +52,9 @@ app.use(authRoutes);
 
 app.use(errorController.get404);
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0`)
+mongoose
+    .connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/shop`)
     .then(result=>{
-        User.findOne().then(user=>{
-            if(!user){
-                const user = new User({
-                    name: 'Test user',
-                    email: 'test@test.com',
-                    cart: {
-                        items: [],
-                    }
-                })
-                user.save();
-            }
-        })
         app.listen(3000)
     })
     .catch(err=>{console.log(err)})

@@ -55,6 +55,6 @@ app.use(errorController.get404);
 mongoose
     .connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/shop`)
     .then(result=>{
-        app.listen(3000)
+        app.listen(3200)
     })
     .catch(err=>{console.log(err)})

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -15,6 +16,8 @@ const store = new MongoDBStore({
     uri: `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0`,
     collection: 'sessions'
 });
+
+const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -33,6 +36,8 @@ app.use(
         saveUninitialized: false,
         store: store
     }));
+
+app.use(csrfProtection)
 
 app.use((req, res, next) => {
     if(!req.session.user){

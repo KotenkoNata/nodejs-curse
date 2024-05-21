@@ -36,7 +36,12 @@ exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         path: '/signup',
         pageTitle: 'Signup',
-        errorMessage: req.flash('error')
+        errorMessage: req.flash('error'),
+        oldInput: {
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
     });
 };
 
@@ -46,7 +51,7 @@ exports.postLogin = (req, res, next) => {
 
     const error = validationResult(req);
     if(!error.isEmpty()){
-        return res.render('auth/login', {
+        return res.status(422).render('auth/login', {
             path: '/login',
             pageTitle: 'Login',
             errorMessage: error.array()[0].msg
@@ -91,6 +96,11 @@ exports.postSignup = (req, res, next) => {
             path: '/signup',
             pageTitle: 'Signup',
             errorMessage: errors.array()[0].msg,
+            oldInput: {
+                email: email,
+                password: password,
+                confirmPassword: req.body.confirmPassword
+            },
         });
     }
     bcrypt

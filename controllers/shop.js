@@ -146,7 +146,6 @@ exports.getInvoice= (req, res, next) => {
                     'Content-Disposition',
                     'inline; filename="'+invoiceName+'"');
             file.pipe(res);
-
         })
         .catch(err=>next(err))
 }

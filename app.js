@@ -1,38 +1,10 @@
-const path = require('path');
-
 const express = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config();
 
-const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
-const User = require('./models/user');
+const feedRoutes = require('./routes/feed');
 
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', 'views');
+//GET /feed/posts
+app.use('/posts', feedRoutes);
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use((req, res, next) => {
-    User.findById('661fc76e603f4d9f7068168e')
-        .then(user => {
-            req.user = new User(user.name, user.email, user.cart, user._id);
-            next();
-        })
-        .catch(err => console.log(err));
-});
-
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
-
-app.use(errorController.get404);
-
-mongoConnect(()=>{
-    app.listen(3200);
-})
+app.listen(8080);

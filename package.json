@@ -1,19 +1,15 @@
 {
-  "name": "rest-api-project",
+  "name": "fullstack-social-network",
   "version": "1.0.0",
-  "description": "",
+  "description": "some text",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\"",
+    "server": "cd backend && npm start",
+    "client": "cd frontend && NODE_OPTIONS=--openssl-legacy-provider npm start",
+    "build": "cd frontend && npm run build"
   },
   "author": "Nataliia Kotenko",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.3",
-    "express": "^4.21.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.9"
-  }
+  "license": "ISC"
 }

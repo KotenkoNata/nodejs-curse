@@ -49,7 +49,8 @@ app.use((error, req, res, next)=>{
   console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
-  res.status(status).json({message: message});
+  const data = error.data;
+  res.status(status).json({message: message, data: data});
 })
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0`)

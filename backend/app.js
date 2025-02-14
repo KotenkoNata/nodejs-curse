@@ -55,6 +55,10 @@ app.use((error, req, res, next)=>{
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0`)
   .then(result=>{
-  app.listen(8080);
+  const server = app.listen(8080);
+  const io = require('socket.io')(server);
+  io.on('connection', socket=>{
+    console.log('Socket is connected!');
+  })
 })
   .catch(err => console.log(err));

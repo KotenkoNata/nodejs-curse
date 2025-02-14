@@ -56,7 +56,7 @@ app.use((error, req, res, next)=>{
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0`)
   .then(result=>{
   const server = app.listen(8080);
-  const io = require('socket.io')(server, {
+  const io = require('./socket').init(server, {
     cors: {
       origin: "http://localhost:3000",
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],

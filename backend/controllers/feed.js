@@ -77,7 +77,7 @@ exports.getPost = async (req, res, next) => {
   const postId = req.params.postId
 
   try {
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId).populate('creator', 'name email');
 
     if (!post) {
       const error = new Error('Could not find post')

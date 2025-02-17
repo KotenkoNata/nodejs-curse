@@ -4,9 +4,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const multer = require('multer');
+const { graphqlHTTP } = require('express-graphql');
 
-const feedRoutes = require('./routes/feed');
-const authRoutes = require('./routes/auth');
+const graphqlSchema = require('./graphql/schema');
+const graphqlResolver = require('./graphql/resolvers');
 
 const app = express();
 
@@ -42,8 +43,10 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.use('/feed', feedRoutes);
-app.use('/auth', authRoutes);
+app.use('/graphql', graphqlHTTP({
+  schema: graphqlSchema,
+  rootValue: graphqlResolver,
+}))
 
 app.use((error, req, res, next)=>{
   console.log(error);
@@ -55,15 +58,6 @@ app.use((error, req, res, next)=>{
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0`)
   .then(result=>{
-  const server = app.listen(8080);
-  const io = require('./socket').init(server, {
-    cors: {
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    }
-  });
-  io.on('connection', socket => {
-    console.log('Client is connected!');
-  })
+  app.listen(8080);
 })
   .catch(err => console.log(err));

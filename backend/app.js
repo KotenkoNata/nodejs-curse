@@ -88,6 +88,6 @@ app.use((error, req, res, next)=>{
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.5xgasid.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0`)
   .then(result=>{
-  app.listen(8080);
+  app.listen(process.env.PORT || 3000);
 })
   .catch(err => console.log(err));

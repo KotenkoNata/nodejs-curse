@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const authMiddleware = require('../middleware/is-auth');
-const res = require('express/lib/response')
+const jwt = require('jsonwebtoken');
+const sinon = require('sinon');
 
 describe('Auth Middleware', () => {
 
@@ -22,6 +23,25 @@ describe('Auth Middleware', () => {
     expect(authMiddleware.bind(this, req, {}, ()=>{})).to.throw();
   })
 
+  it('should yield a userId after decoding the token', ()=>{
+    const req = {
+      get: function (headerName) {
+        return 'Bearer xyzsdsdgdfgdlfkgjsdf';
+      }
+    }
+    sinon.stub(jwt, 'verify');
+
+    jwt.verify.returns({
+      userId: 'sdhf'
+    })
+
+    authMiddleware(req, {}, ()=>{});
+    expect(req).to.have.property('userId');
+    expect(req).to.have.property('userId', 'sdhf');
+    expect(jwt.verify.called).to.be.true;
+    jwt.verify.restore();
+  })
+
   it('should throw an error if the token cannot be verified', ()=>{
     const req = {
       get: function (headerName) {
@@ -29,16 +49,6 @@ describe('Auth Middleware', () => {
       }
     }
     expect(authMiddleware.bind(this, req, {}, ()=>{})).to.throw();
-  })
-
-  it('should yield a userId after decoding the token', ()=>{
-    const req = {
-      get: function (headerName) {
-        return 'Bearer xyzsdsdgdfgdlfkgjsdf';
-      }
-    }
-    authMiddleware(req, {}, ()=>{});
-    expect(req).to.have.property('userId');
   })
 
 })

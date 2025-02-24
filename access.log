@@ -1,5 +1,0 @@
-::1 - - [20/Feb/2025:15:54:49 +0000] "GET /products HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
-::1 - - [20/Feb/2025:15:54:49 +0000] "GET /css/product.css HTTP/1.1" 200 379 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
-::1 - - [20/Feb/2025:15:54:49 +0000] "GET /js/main.js HTTP/1.1" 200 519 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
-::1 - - [20/Feb/2025:15:54:49 +0000] "GET /css/main.css HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
-::1 - - [20/Feb/2025:15:54:49 +0000] "GET /images/2024-05-29T13:28:23.366Z-Screenshot%202024-01-30%20at%2018.34.24.png HTTP/1.1" 404 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"

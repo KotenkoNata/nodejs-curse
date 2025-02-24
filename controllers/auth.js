@@ -43,6 +43,7 @@ exports.login = async (req, res, next) => {
       const error = new Error('A user with this email could not be found.');
       error.statusCode = 401;
       throw error;
+      return;
     }
     loadedUser = user;
     const isEqual = await bcrypt.compare(password, user.password);
@@ -60,11 +61,13 @@ exports.login = async (req, res, next) => {
       { expiresIn: '1h' }
     );
     res.status(200).json({ token: token, userId: loadedUser._id.toString() });
+    return;
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
     }
     next(err);
+    return err;
   }
 };
 

@@ -3,7 +3,7 @@ const num2Element = document.getElementById('num2') as HTMLInputElement;
 
 const buttonElement = document.querySelector('button')!;
 
-const numResults: number[] = [];
+const numResults: Array<number> = [];
 const stringResults: string[] = [];
 
 type NumOrString = number | string;
@@ -40,5 +40,15 @@ buttonElement.addEventListener('click', () => {
 
     console.log(numResults, stringResults);
 });
+
+const myPromise = new Promise<string>((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve('It worked')
+    }, 1000)
+});
+
+myPromise.then(result=>{
+    console.log(result.split('w'));
+})
 
 

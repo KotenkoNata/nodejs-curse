@@ -29,7 +29,7 @@ router.put('/todo/:todoId', (req, res, next) => {
             id: todos[todoIndex].id,
             text: req.body.text,
         };
-        return res.status(200).json({message: 'Updated todo',todos: todos});
+        res.status(200).json({message: 'Updated todo',todos: todos});
     }
 
     res.status(404).json({message: 'Could not find todo for this id'});

@@ -3,3 +3,9 @@
 .env.local
 .env.staging!
 /.env
+/deno/.env
+
+.env!/deno/.env
+
+deno/.env
+
